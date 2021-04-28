@@ -38,6 +38,7 @@ jobs:
       # Runs my janky stuff
       - name: janky stuff
         run: |
+          sudo su
           yum install -y zip
           zip /tmp/sitearchive.zip /var/www/old-site.html
           unzip /tmp/sitearchive.zip -d /tmp/sitearchive/
