@@ -1,0 +1,11 @@
+#!/bin/bash
+yum install -y zip
+zip /tmp/sitearchive.zip /var/www/old-site.html
+
+
+unzip /tmp/sitearchive.zip -d /tmp/sitearchive/
+mv /tmp/sitearchive/var/www/old-site.html /var/www/new-site.html
+systemctl restart nginx
+
+http=$(curl -I localhost/new-site.html | grep HTTP)
+if [ "$http" == "HTTP/1.1 404 Not Found" ]; then rm /var/www/new-site.html; fi
